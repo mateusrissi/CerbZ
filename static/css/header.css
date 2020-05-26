@@ -1,0 +1,23 @@
+#search_field {
+  border: none;
+}
+
+#search_field::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #6e6e6e;
+}
+
+#search_field:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #6e6e6e;
+}
+
+#search_field::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #6e6e6e;
+}
+
+#search_field:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #6e6e6e;
+}
