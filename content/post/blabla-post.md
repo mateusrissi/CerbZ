@@ -1,21 +1,24 @@
 +++
 authors = [
+    "Guilherme",
+    "Mateus",
     "Rafael",
 ]
 
-title = "My third Post"
-date = "2020-05-08"
+title = "Example Post"
+date = "2020-06-08"
 description = "Guide to post"
 
 tags = [
     "tech",
     "zoera",
-    "trampo",
 ]
 
 images = [
-    "star-wars.png",
+    "code.jpg",
 ]
+
+draft = true
 +++
 
 Still, she's got a lot of spirit. I don't know, what do you think?
