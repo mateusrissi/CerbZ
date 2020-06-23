@@ -6,7 +6,6 @@ authors = [
 title = "Criar local repo"
 date = "2020-06-22"
 description = "Local repo creation"
-summary = 'Testing localrepo summary'
 
 tags = [
   "tutorial",
@@ -15,7 +14,7 @@ tags = [
 ]
 
 images = [
-  "local-repo-centos6.jpeg",
+  "local_repo_logo.jpg",
 ]
 +++
 
