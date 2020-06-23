@@ -14,7 +14,7 @@ tags = [
 ]
 
 images = [
-    "checkmk_logo_main_vertical.svg",
+    "code.jpg",
 ]
 
 draft = false
