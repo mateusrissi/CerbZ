@@ -23,9 +23,8 @@ O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de c
 
 Esta postagem serve de tutorial para a instalação do Check_MK 1.5 Raw Edition no sistema operacional CentOS 6.
 ```html
-<!--mor-->
+<!--more-->
 ```
-
 # Particionar o diretório /OPT
 
 O diretório __/opt__ é tradicionalmente usado para softwares de terceiros.
