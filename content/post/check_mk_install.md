@@ -6,6 +6,7 @@ authors = [
 title = "Instalação do Check_MK no CentOS 6"
 date = "2020-06-22"
 description = "Instalação do Check_MK no CentOS 6"
+summary = "Testing summary"
 
 tags = [
   "tutorial",
@@ -21,10 +22,6 @@ images = [
 O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de código aberto, para realizar monitoramento (MK vem de Mathias Kettner, o autor da ferramenta). Oferece dashboards com métricas e gráficos, sua interface é amigável e totalmente customizável.
 
 Esta postagem serve de tutorial para a instalação do Check_MK 1.5 Raw Edition no sistema operacional CentOS 6.
-
-```html
-<!--more-->
-```
 
 # Particionar o diretório /OPT
 
