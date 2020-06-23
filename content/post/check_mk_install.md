@@ -22,6 +22,10 @@ O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de c
 
 Esta postagem serve de tutorial para a instalação do Check_MK 1.5 Raw Edition no sistema operacional CentOS 6.
 
+```html
+<!--more-->
+```
+
 # Particionar o diretório /OPT
 
 O diretório __/opt__ é tradicionalmente usado para softwares de terceiros.
@@ -35,6 +39,9 @@ Vantagens de particionar o /opt
 * Maior facilidade em redimensionar o disco;
 * Possibilidade de utilizar diferentes Sistemas de Arquivos (ext4, JFS, XFS);
 * Maior facilidade na hora de realizar o backup.
+
+É possível particionar na hora da instalação do SO ou então lvm
+
 
 # Emails
 
