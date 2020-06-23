@@ -3,20 +3,19 @@ authors = [
   "Mateus",
 ]
 
-title = "Instalação do Check_MK no CentOS 6"
+title = "Criar local repo"
 date = "2020-06-22"
-description = "Instalação do Check_MK no CentOS 6"
-summary = 'Testing summary'
+description = "Local repo creation"
+summary = 'Testing localrepo summary'
 
 tags = [
   "tutorial",
-  "check_mk",
   "centos",
   "centos 6",
 ]
 
 images = [
-  "check_mk_logo.png",
+  "local-repo-centos6.jpeg",
 ]
 +++
 
