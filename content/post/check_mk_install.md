@@ -1,6 +1,6 @@
 +++
 authors = [
-    "Mateus",
+  "Mateus",
 ]
 
 title = "Instalação do Check_MK no CentOS 6"
@@ -8,16 +8,14 @@ date = "2020-06-22"
 description = "Instalação do Check_MK no CentOS 6"
 
 tags = [
-    "tutorial",
-    "check_mk",
-    "centos",
+  "tutorial",
+  "check_mk",
+  "centos",
 ]
 
 images = [
-    "code.jpg",
+  "code.jpg",
 ]
-
-draft = false
 +++
 
 O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de código aberto, para realizar monitoramento (MK vem de Mathias Kettner, o autor da ferramenta). Oferece dashboards com métricas e gráficos, sua interface é amigável e totalmente customizável.

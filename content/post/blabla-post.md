@@ -17,8 +17,6 @@ tags = [
 images = [
     "code.jpg",
 ]
-
-draft = false
 +++
 
 Still, she's got a lot of spirit. I don't know, what do you think?
