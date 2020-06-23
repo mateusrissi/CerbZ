@@ -6,7 +6,7 @@ authors = [
 title = "Instalação do Check_MK no CentOS 6"
 date = "2020-06-22"
 description = "Instalação do Check_MK no CentOS 6"
-summary = "Testing summary"
+summary = 'Testing summary'
 
 tags = [
   "tutorial",
@@ -15,7 +15,7 @@ tags = [
 ]
 
 images = [
-  "code.jpg",
+  "check_mk_logo.png",
 ]
 +++
 
