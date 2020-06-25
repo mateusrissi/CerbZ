@@ -18,18 +18,17 @@ images = [
   "check_mk_logo.png",
 ]
 +++
+# Introdução
+&nbsp;&nbsp;&nbsp;&nbsp;O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de código aberto, para realizar monitoramento (MK vem de Mathias Kettner, o autor da ferramenta). Oferece dashboards com métricas e gráficos, sua interface é amigável e totalmente customizável.
 
-O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de código aberto, para realizar monitoramento (MK vem de Mathias Kettner, o autor da ferramenta). Oferece dashboards com métricas e gráficos, sua interface é amigável e totalmente customizável.
-
-Esta postagem serve de tutorial para a instalação do Check_MK 1.5 Raw Edition no sistema operacional CentOS 6.
+&nbsp;&nbsp;&nbsp;&nbsp;Esta postagem serve de tutorial para a instalação do __Check_MK 1.5 Raw Edition__ no sistema operacional __CentOS 6__.
 
 # Particionar o diretório /OPT
+&nbsp;&nbsp;&nbsp;&nbsp;O diretório __/opt__ é tradicionalmente usado para softwares de terceiros.
 
-O diretório __/opt__ é tradicionalmente usado para softwares de terceiros.
+&nbsp;&nbsp;&nbsp;&nbsp;O Check_MK é instalado no path __/opt/omd__. Se o servidor for usado exclusivamente pelo Check_MK, então é aconselhável que __/opt__ ou o __/opt/omd__ tenha uma partição própria.
 
-O Check_MK é instalado no path __/opt/omd__. Se o servidor for usado exclusivamente pelo Check_MK, então é aconselhável que __/opt__ ou o __/opt/omd__ tenha uma partição própria.
-
-Vantagens de particionar o /opt
+&nbsp;&nbsp;&nbsp;&nbsp;Vantagens de particionar o /opt:
 
 * Não afeta a estrutura do sistema operacional;
 * Todos os arquivos referentes ao Check_MK ficam em um único lugar (facilitando encontrar arquivos de configuração, por exemplo);
@@ -37,37 +36,101 @@ Vantagens de particionar o /opt
 * Possibilidade de utilizar diferentes Sistemas de Arquivos (ext4, JFS, XFS);
 * Maior facilidade na hora de realizar o backup.
 
-É possível particionar na hora da instalação do SO ou então lvm
-
-
 # Emails
+&nbsp;&nbsp;&nbsp;&nbsp;Para recebermos notificações sobre o monitoramento por email vamos configurar o [SMTP](https://pt.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol "SMTP").
+
+
 
 # Tempo do sistema
+&nbsp;&nbsp;&nbsp;&nbsp;Para que o Check_MK use um horário correto utilizaremos o ntrpdate.
+
+```bash
+yum install ntpdate
+ntpdate -u 0.br.pool.ntp.org
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;O __0.br.pool.ntp.org__ é apenas um servidor [NTP](https://pt.wikipedia.org/wiki/Network_Time_Protocol "Network Time Protocol"), pode ser substituído por qualquer outro da sua preferência.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Após executar o comando:
+
+![ntpdate image](/content/images/ntp_date.jpg "ntpdate image")
 
 # SELinux
+&nbsp;&nbsp;&nbsp;&nbsp;O Security-Enhanced Linux é uma arquitetura de segurança que permite que administradores tenham mais controle sobre quem pode acessar o sistema. Usando políticas de segurança, um conjunto de regras que dizem ao SELinux o que pode ou não ser acessado, ele define controles de acesso para aplicações, processos e arquivos em um sistema.
 
-O Security-Enhanced Linux é uma arquitetura de segurança que permite que administradores tenham mais controle sobre quem pode acessar o sistema. Usando políticas de segurança, um conjunto de regras que dizem ao SELinux o que pode ou não ser acessado, ele define controles de acesso para aplicações, processos e arquivos em um sistema.
-
-Aqui temos duas opções:
+&nbsp;&nbsp;&nbsp;&nbsp;Aqui temos duas opções:
 
 ## Desabilitar SELinux
 
-Podemos desabilitar o SELinux (não aconselhado para ambientes de produção) editando o arquivo __/etc/selinux/config__.
+&nbsp;&nbsp;&nbsp;&nbsp;Podemos desabilitar o SELinux (não aconselhado para ambientes de [produção](https://bsoft.com.br/blog/ambiente-de-producao-e-homologacao "Explicação ambiente de produção")) editando o arquivo __/etc/selinux/config__.
 
 ```bash
-# vi /etc/selinux/config
+vi /etc/selinux/config
 ```
 
-Troque "enforcing" por "disabled" e reinicie o servidor.
+&nbsp;&nbsp;&nbsp;&nbsp;Troque "enforcing" por "disabled" e reinicie o servidor.
 
 ```bash
-# reboot
+reboot
 ```
 
 ## Configurar o SELinux
 
-Podemos adicionar uma regra que permita o funcionamento do Check_MK.
+&nbsp;&nbsp;&nbsp;&nbsp;Podemos adicionar regras que permitam o funcionamento do Check_MK usando o [audit2allow](https://linux.die.net/man/1/audit2allow "audit2allow linux man page"). Aqui tem um [tutorial](https://andhersonsilva.wordpress.com/2016/10/04/apresentando-o-audit2allow-para-configurar-politicas-no-selinux/ "Tutorial audit2allow") para o audit2allow.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Para instalar o pacote que contém o audit2allow basta executar o comando:
 
 ```bash
-# 
+yum install policycoreutils-python
 ```
+
+# EPEL
+&nbsp;&nbsp;&nbsp;&nbsp;Como estamos realizando a instalação do Check_MK 1.5, se faz necessário configurar o repositório EPEL (Extra Packages for Enterprise Linux) para a instalação de determinados pacotes que o Check_MK precisa. Para tanto, basta executar o comando:
+
+```bash
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;Assim criamos o repositório EPEL para o CentOS 6. Podemos confirmar isso com o comando:
+
+```bash
+cat /etc/yum.repos.d/epel.repo
+```
+
+# Instalação do Check_MK
+
+&nbsp;&nbsp;&nbsp;&nbsp;Agora, com todo o necessário já configurado, é simples:
+
+## Download
+&nbsp;&nbsp;&nbsp;&nbsp;Outras versões disponíveis [aqui](https://checkmk.com/download.php "Página de download do Check_MK").
+
+&nbsp;&nbsp;&nbsp;&nbsp;Realizamos o download do Check_MK (arquivo será salvo com o nome "check_mk-1.5.rpm"):
+
+```bash
+curl -L https://checkmk.com/support/1.5.0p24/check-mk-raw-1.5.0p24-el6-38.x86_64.rpm -o check_mk-1.5.rpm
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;Antes de instalar o pacote, faça o download da chave e realize sua importação:
+
+```bash
+curl -L https://checkmk.com/support/Check_MK-pubkey.gpg -o Check_MK-pubkey.gpg
+rpm --import Check_MK-pubkey.gpg
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;Agora sim, vamos instalar o Check_MK:
+
+```bash
+yum install check_mk-1.5.rpm
+```
+
+Execute o seguinte comando para verificar se o Check_MK está instalado:
+
+```bash
+omd version
+```
+
+![OMD Version](/content/images/omd_version.jpg "OMD Version")
+
+# Criação do site
+
+&nbsp;&nbsp;&nbsp;&nbsp;
