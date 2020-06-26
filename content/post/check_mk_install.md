@@ -70,8 +70,6 @@ ntpdate -u 0.br.pool.ntp.org
 
 &nbsp;&nbsp;&nbsp;&nbsp;Aqui temos duas opções:
 
-&nbsp;
-
 ### Desabilitar SELinux
 
 &nbsp;&nbsp;&nbsp;&nbsp;Podemos desabilitar o SELinux (não aconselhado para ambientes de [produção](https://bsoft.com.br/blog/ambiente-de-producao-e-homologacao "Explicação ambiente de produção")) editando o arquivo __/etc/selinux/config__.
@@ -147,6 +145,7 @@ omd version
 
 ![OMD Version](https://www.cerbz.com/images/omd_version.jpg "OMD Version")
 
+&nbsp;
 
 &nbsp;&nbsp;&nbsp;&nbsp;Outras versões disponíveis [aqui](https://checkmk.com/download.php "Página de download do Check_MK").
 
@@ -170,7 +169,7 @@ omd start monitoramento
 
 ![OMD Start](https://www.cerbz.com/images/ "OMD Start")
 
-Caso não tenha anotado a senha do site, mude para o usuário monitoramento com ```bash su monitoramento``` e troque a senha com o comando:
+Caso não tenha anotado a senha do site, mude para o usuário monitoramento com ```_su monitoramento_``` e troque a senha com o comando:
 
 ```bash
 htpasswd -m ~/etc/htpasswd cmkadmin
