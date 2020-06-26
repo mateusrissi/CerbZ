@@ -140,9 +140,6 @@ Execute o seguinte comando para verificar se tudo ocorreu corretamente:
 ```bash
 omd version
 ```
-
-![OMD Version](https://www.cerbz.com/images/omd_version.jpg "OMD Version")
-
 &nbsp;
 
 &nbsp;&nbsp;&nbsp;&nbsp;Outras versões do check_MK estão disponíveis [aqui](https://checkmk.com/download.php "Página de download do Check_MK").
@@ -183,4 +180,4 @@ htpasswd -m ~/etc/htpasswd cmkadmin
 
 &nbsp;&nbsp;&nbsp;&nbsp;Caso não esteja funcionando, o motivo pode ser o bloqueio do site pelo firewall do CentOS. Desabilite o firewall com o comando ```service iptables stop``` e tente acessar o site novamente.
 
-&nbsp;&nbsp;&nbsp;&nbsp;Funcionando?
+&nbsp;&nbsp;&nbsp;&nbsp;Funcionando? Agora só é preciso adicionar quais itens você quer monitorar. Futuramente farei uma postagem sobre o assunto.

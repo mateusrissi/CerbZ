@@ -26,6 +26,10 @@ body p {
   text-align: justify;
 }
 
+body div.content {
+  text-align: justify;
+}
+
 p img {
   display: block;
   margin-left: auto;
