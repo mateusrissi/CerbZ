@@ -39,6 +39,6 @@ p img {
   margin: 0 auto;
   /*max-width: 500px;
   max-height: 500px;*/
-  max-width: fit-content;
-  max-height: fit-content;
+  max-width: 75%;
+  max-height: 75%;
 }
