@@ -12,6 +12,8 @@ tags = [
   "check_mk",
   "centos",
   "centos 6",
+  "linux",
+  "omd",
 ]
 
 images = [
@@ -22,6 +24,8 @@ images = [
 &nbsp;&nbsp;&nbsp;&nbsp;O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de código aberto, para realizar monitoramento (MK vem de Mathias Kettner, o autor da ferramenta). Oferece dashboards com métricas e gráficos, sua interface é amigável e totalmente customizável.
 
 &nbsp;&nbsp;&nbsp;&nbsp;Esta postagem serve de tutorial para a instalação do __Check_MK 1.5 Raw Edition__ no sistema operacional __CentOS 6__.
+
+&nbsp;
 
 # Particionar o diretório /OPT
 &nbsp;&nbsp;&nbsp;&nbsp;O diretório __/opt__ é tradicionalmente usado para softwares de terceiros.
@@ -36,31 +40,39 @@ images = [
 * Possibilidade de utilizar diferentes Sistemas de Arquivos (ext4, JFS, XFS);
 * Maior facilidade na hora de realizar o backup.
 
+&nbsp;
+
 # Emails
 &nbsp;&nbsp;&nbsp;&nbsp;Para recebermos notificações sobre o monitoramento por email vamos configurar o [SMTP](https://pt.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol "SMTP").
 
 
+&nbsp;
 
 # Tempo do sistema
-&nbsp;&nbsp;&nbsp;&nbsp;Para que o Check_MK use um horário correto utilizaremos o ntrpdate.
+&nbsp;&nbsp;&nbsp;&nbsp;Para que o Check_MK use um horário correto utilizaremos o ntpdate.
 
 ```bash
-yum install ntpdate
+yum check-update
+yum -y install ntpdate
 ntpdate -u 0.br.pool.ntp.org
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;O __0.br.pool.ntp.org__ é apenas um servidor [NTP](https://pt.wikipedia.org/wiki/Network_Time_Protocol "Network Time Protocol"), pode ser substituído por qualquer outro da sua preferência.
+&nbsp;&nbsp;&nbsp;&nbsp;O __0.br.pool.ntp.org__ é apenas um servidor [NTP](https://pt.wikipedia.org/wiki/Network_Time_Protocol "Network Time Protocol"), pode ser substituído por qualquer outro de sua preferência.
 
 &nbsp;&nbsp;&nbsp;&nbsp;Após executar o comando:
 
-![ntpdate image](/content/images/ntp_date.jpg "ntpdate image")
+![ntpdate image](https://www.cerbz.com/images/ntp_date.jpg "ntpdate image")
+
+&nbsp;
 
 # SELinux
 &nbsp;&nbsp;&nbsp;&nbsp;O Security-Enhanced Linux é uma arquitetura de segurança que permite que administradores tenham mais controle sobre quem pode acessar o sistema. Usando políticas de segurança, um conjunto de regras que dizem ao SELinux o que pode ou não ser acessado, ele define controles de acesso para aplicações, processos e arquivos em um sistema.
 
 &nbsp;&nbsp;&nbsp;&nbsp;Aqui temos duas opções:
 
-## Desabilitar SELinux
+&nbsp;
+
+### Desabilitar SELinux
 
 &nbsp;&nbsp;&nbsp;&nbsp;Podemos desabilitar o SELinux (não aconselhado para ambientes de [produção](https://bsoft.com.br/blog/ambiente-de-producao-e-homologacao "Explicação ambiente de produção")) editando o arquivo __/etc/selinux/config__.
 
@@ -74,7 +86,9 @@ vi /etc/selinux/config
 reboot
 ```
 
-## Configurar o SELinux
+&nbsp;
+
+### Configurar o SELinux
 
 &nbsp;&nbsp;&nbsp;&nbsp;Podemos adicionar regras que permitam o funcionamento do Check_MK usando o [audit2allow](https://linux.die.net/man/1/audit2allow "audit2allow linux man page"). Aqui tem um [tutorial](https://andhersonsilva.wordpress.com/2016/10/04/apresentando-o-audit2allow-para-configurar-politicas-no-selinux/ "Tutorial audit2allow") para o audit2allow.
 
@@ -84,11 +98,14 @@ reboot
 yum install policycoreutils-python
 ```
 
+&nbsp;
+
 # EPEL
 &nbsp;&nbsp;&nbsp;&nbsp;Como estamos realizando a instalação do Check_MK 1.5, se faz necessário configurar o repositório EPEL (Extra Packages for Enterprise Linux) para a instalação de determinados pacotes que o Check_MK precisa. Para tanto, basta executar o comando:
 
 ```bash
-yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+yum check-update
 ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;Assim criamos o repositório EPEL para o CentOS 6. Podemos confirmar isso com o comando:
@@ -97,12 +114,11 @@ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.r
 cat /etc/yum.repos.d/epel.repo
 ```
 
+&nbsp;
+
 # Instalação do Check_MK
 
 &nbsp;&nbsp;&nbsp;&nbsp;Agora, com todo o necessário já configurado, é simples:
-
-## Download
-&nbsp;&nbsp;&nbsp;&nbsp;Outras versões disponíveis [aqui](https://checkmk.com/download.php "Página de download do Check_MK").
 
 &nbsp;&nbsp;&nbsp;&nbsp;Realizamos o download do Check_MK (arquivo será salvo com o nome "check_mk-1.5.rpm"):
 
@@ -123,14 +139,49 @@ rpm --import Check_MK-pubkey.gpg
 yum install check_mk-1.5.rpm
 ```
 
-Execute o seguinte comando para verificar se o Check_MK está instalado:
+Execute o seguinte comando para verificar se tudo ocorreu corretamente:
 
 ```bash
 omd version
 ```
 
-![OMD Version](/content/images/omd_version.jpg "OMD Version")
+![OMD Version](https://www.cerbz.com/images/omd_version.jpg "OMD Version")
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;Outras versões disponíveis [aqui](https://checkmk.com/download.php "Página de download do Check_MK").
+
+&nbsp;
 
 # Criação do site
 
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;Com o OMD podemos criar nosso site de monitoramento (é possível criar quantos sites quiser). Vamos chamar nosso site de "monitoramento" (plausível?):
+
+```bash
+omd create monitoramento
+```
+
+![OMD Create](https://www.cerbz.com/images/ "OMD Create")
+
+Então, vamos iniciar nosso site:
+
+```bash
+omd start monitoramento
+```
+
+![OMD Start](https://www.cerbz.com/images/ "OMD Start")
+
+Caso não tenha anotado a senha do site, mude para o usuário monitoramento com ```bash su monitoramento``` e troque a senha com o comando:
+
+```bash
+htpasswd -m ~/etc/htpasswd cmkadmin
+```
+
+Agora é possível acessar o site recém criado, para tanto utilize seu navegador e acesse <server-name-or-ip-address>/<site_name>.
+
+Por exemplo, o endereço IP do meu servidor é 192.168.0.177 e o nome do site que criei é monitoramento, logo devo acessar a URL 192.168.0.177/monitoramento.
+
+![Check_MK Login Page](https://www.cerbz.com/images/ "Check_MK Login Page")
+
+![Check_MK Index Page](https://www.cerbz.com/images/ "Check_MK Index Page")
+
+Funcionando?
