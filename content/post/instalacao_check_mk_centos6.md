@@ -5,7 +5,7 @@ authors = [
 
 title = "Instalação do Check_MK no CentOS 6"
 date = "2020-06-22"
-description = "Instalação do Check_MK no CentOS 6"
+description = "&nbsp;&nbsp;&nbsp;&nbsp;O check_MK é uma ferramenta, de código aberto, para realizar monitoramento da infraestrutura de TI. Esta postagem é um tutorial para a instalação do Check_MK 1.5 Raw Edition no CentOS 6."
 
 tags = [
   "tutorial",
@@ -135,11 +135,8 @@ rpm --import Check_MK-pubkey.gpg
 yum install check_mk-1.5.rpm
 ```
 
-Execute o seguinte comando para verificar se tudo ocorreu corretamente:
+Para verificar se tudo ocorreu corretamente, execute o seguinte comando ```omd version```.
 
-```bash
-omd version
-```
 &nbsp;
 
 &nbsp;&nbsp;&nbsp;&nbsp;Outras versões do check_MK estão disponíveis [aqui](https://checkmk.com/download.php "Página de download do Check_MK").
@@ -154,15 +151,13 @@ omd version
 omd create monitoramento
 ```
 
-![OMD Create](https://www.cerbz.com/images/ "OMD Create")
+![OMD Create](https://www.cerbz.com/images/omd_create.jpg "OMD Create")
 
 &nbsp;&nbsp;&nbsp;&nbsp;Então, vamos iniciar nosso site:
 
 ```bash
 omd start monitoramento
 ```
-
-![OMD Start](https://www.cerbz.com/images/ "OMD Start")
 
 &nbsp;&nbsp;&nbsp;&nbsp;Caso não tenha anotado a senha do site, mude para o usuário monitoramento com ```su monitoramento``` e troque a senha com o comando:
 
@@ -174,9 +169,9 @@ htpasswd -m ~/etc/htpasswd cmkadmin
 
 &nbsp;&nbsp;&nbsp;&nbsp;Agora é possível acessar o site recém criado, para tanto utilize seu navegador e acesse ```server-name-or-ip-address/site_name```. Por exemplo, o endereço IP do meu servidor é 192.168.0.177 e o nome do site que criei é monitoramento, logo devo acessar a URL ```192.168.0.177/monitoramento```.
 
-![Check_MK Login Page](https://www.cerbz.com/images/ "Check_MK Login Page")
+![Check_MK Login Page](https://www.cerbz.com/images/check_mk_login_page.jpg "Check_MK Login Page")
 
-![Check_MK Index Page](https://www.cerbz.com/images/ "Check_MK Index Page")
+![Check_MK Index Page](https://www.cerbz.com/images/check_mk_index_page.jpg "Check_MK Index Page")
 
 &nbsp;&nbsp;&nbsp;&nbsp;Caso não esteja funcionando, o motivo pode ser o bloqueio do site pelo firewall do CentOS. Desabilite o firewall com o comando ```service iptables stop``` e tente acessar o site novamente.
 
