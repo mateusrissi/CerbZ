@@ -65,7 +65,7 @@ ntpdate -u 0.br.pool.ntp.org
 
 &nbsp;
 
-&nbsp;&nbsp;&nbsp;&nbsp;Edite o arquivo da crontab com ```vi /etc/crontab``` e adicione a seguinte linha:
+&nbsp;&nbsp;&nbsp;&nbsp;Edite o arquivo da crontab com ```vi /etc/crontab``` e adicione a seguinte linha para que o comando ```ntpdate``` seja executado sozinho 1 vez a cada hora:
 
 ```bash
 9 * * * * root ntpdate 0.br.pool.ntp.org
