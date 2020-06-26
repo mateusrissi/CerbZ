@@ -21,18 +21,18 @@ images = [
 ]
 +++
 # Introdução
-&nbsp;&nbsp;&nbsp;&nbsp;O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de código aberto, para realizar monitoramento (MK vem de Mathias Kettner, o autor da ferramenta). Oferece dashboards com métricas e gráficos, sua interface é amigável e totalmente customizável.
+&nbsp;&nbsp;&nbsp;&nbsp;O [Check_MK](https://checkmk.com/ "Check_MK's Homepage") é uma ferramenta, de código aberto, para realizar monitoramento da infraestrutura de TI. Oferece dados sobre avaliabilidade e performance dos equipamentos (com métricas e gráficos), alertas dinâmicos e sua interface é amigável e totalmente customizável.
 
 &nbsp;&nbsp;&nbsp;&nbsp;Esta postagem serve de tutorial para a instalação do __Check_MK 1.5 Raw Edition__ no sistema operacional __CentOS 6__.
 
 &nbsp;
 
 # Particionar o diretório /OPT
-&nbsp;&nbsp;&nbsp;&nbsp;O diretório __/opt__ é tradicionalmente usado para softwares de terceiros.
+&nbsp;&nbsp;&nbsp;&nbsp;O diretório ```/opt``` é tradicionalmente usado para softwares de terceiros.
 
-&nbsp;&nbsp;&nbsp;&nbsp;O Check_MK é instalado no path __/opt/omd__. Se o servidor for usado exclusivamente pelo Check_MK, então é aconselhável que __/opt__ ou o __/opt/omd__ tenha uma partição própria.
+&nbsp;&nbsp;&nbsp;&nbsp;O Check_MK é instalado no path ```/opt/omd```. Se o servidor for usado exclusivamente pelo Check_MK, então é aconselhável que ```/opt``` ou o ```/opt/omd``` tenha uma partição própria.
 
-&nbsp;&nbsp;&nbsp;&nbsp;Vantagens de particionar o /opt:
+&nbsp;&nbsp;&nbsp;&nbsp;Vantagens de particionar o ```/opt```:
 
 * Não afeta a estrutura do sistema operacional;
 * Todos os arquivos referentes ao Check_MK ficam em um único lugar (facilitando encontrar arquivos de configuração, por exemplo);
@@ -49,7 +49,7 @@ images = [
 &nbsp;
 
 # Tempo do sistema
-&nbsp;&nbsp;&nbsp;&nbsp;Para que o Check_MK use um horário correto utilizaremos o ntpdate.
+&nbsp;&nbsp;&nbsp;&nbsp;Para que o Check_MK use um horário correto utilizaremos o ```ntpdate```.
 
 ```bash
 yum check-update
@@ -65,6 +65,14 @@ ntpdate -u 0.br.pool.ntp.org
 
 &nbsp;
 
+&nbsp;&nbsp;&nbsp;&nbsp;Edite o arquivo da crontab com ```vi /etc/crontab``` e adicione a seguinte linha:
+
+```bash
+9 * * * * root ntpdate 0.br.pool.ntp.org
+```
+
+&nbsp;
+
 # SELinux
 &nbsp;&nbsp;&nbsp;&nbsp;O Security-Enhanced Linux é uma arquitetura de segurança que permite que administradores tenham mais controle sobre quem pode acessar o sistema. Usando políticas de segurança, um conjunto de regras que dizem ao SELinux o que pode ou não ser acessado, ele define controles de acesso para aplicações, processos e arquivos em um sistema.
 
@@ -72,13 +80,13 @@ ntpdate -u 0.br.pool.ntp.org
 
 ### Desabilitar SELinux
 
-&nbsp;&nbsp;&nbsp;&nbsp;Podemos desabilitar o SELinux (não aconselhado para ambientes de [produção](https://bsoft.com.br/blog/ambiente-de-producao-e-homologacao "Explicação ambiente de produção")) editando o arquivo __/etc/selinux/config__.
+&nbsp;&nbsp;&nbsp;&nbsp;Podemos desabilitar o SELinux (não aconselhado para ambientes de [produção](https://bsoft.com.br/blog/ambiente-de-producao-e-homologacao "Explicação ambiente de produção")) editando o arquivo ```/etc/selinux/config```.
 
 ```bash
 vi /etc/selinux/config
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;Troque "enforcing" por "disabled" e reinicie o servidor.
+&nbsp;&nbsp;&nbsp;&nbsp;Troque ```enforcing``` por ```disabled``` e reinicie o servidor.
 
 ```bash
 reboot
@@ -88,7 +96,7 @@ reboot
 
 ### Configurar o SELinux
 
-&nbsp;&nbsp;&nbsp;&nbsp;Podemos adicionar regras que permitam o funcionamento do Check_MK usando o [audit2allow](https://linux.die.net/man/1/audit2allow "audit2allow linux man page"). Aqui tem um [tutorial](https://andhersonsilva.wordpress.com/2016/10/04/apresentando-o-audit2allow-para-configurar-politicas-no-selinux/ "Tutorial audit2allow") para o audit2allow.
+&nbsp;&nbsp;&nbsp;&nbsp;Podemos adicionar regras que permitam o funcionamento do Check_MK usando o [audit2allow](https://linux.die.net/man/1/audit2allow "audit2allow linux man page"). Aqui tem um [tutorial](https://andhersonsilva.wordpress.com/2016/10/04/apresentando-o-audit2allow-para-configurar-politicas-no-selinux/ "Tutorial audit2allow") para o ```audit2allow```.
 
 &nbsp;&nbsp;&nbsp;&nbsp;Para instalar o pacote que contém o audit2allow basta executar o comando:
 
@@ -161,7 +169,7 @@ omd create monitoramento
 
 ![OMD Create](https://www.cerbz.com/images/ "OMD Create")
 
-Então, vamos iniciar nosso site:
+&nbsp;&nbsp;&nbsp;&nbsp;Então, vamos iniciar nosso site:
 
 ```bash
 omd start monitoramento
@@ -169,18 +177,18 @@ omd start monitoramento
 
 ![OMD Start](https://www.cerbz.com/images/ "OMD Start")
 
-Caso não tenha anotado a senha do site, mude para o usuário monitoramento com _```su monitoramento```_ e troque a senha com o comando:
+&nbsp;&nbsp;&nbsp;&nbsp;Caso não tenha anotado a senha do site, mude para o usuário monitoramento com _```su monitoramento```_ e troque a senha com o comando:
 
 ```bash
 htpasswd -m ~/etc/htpasswd cmkadmin
 ```
 
-Agora é possível acessar o site recém criado, para tanto utilize seu navegador e acesse <server-name-or-ip-address>/<site_name>.
-
-Por exemplo, o endereço IP do meu servidor é 192.168.0.177 e o nome do site que criei é monitoramento, logo devo acessar a URL 192.168.0.177/monitoramento.
+&nbsp;&nbsp;&nbsp;&nbsp;Agora é possível acessar o site recém criado, para tanto utilize seu navegador e acesse _server-name-or-ip-address/site_name_. Por exemplo, o endereço IP do meu servidor é 192.168.0.177 e o nome do site que criei é monitoramento, logo devo acessar a URL _192.168.0.177/monitoramento_.
 
 ![Check_MK Login Page](https://www.cerbz.com/images/ "Check_MK Login Page")
 
 ![Check_MK Index Page](https://www.cerbz.com/images/ "Check_MK Index Page")
 
 Funcionando?
+
+Caso não esteja funcionando, o motivo pode ser o bloqueio do site pelo firewall do CentOS. Desabilite o firewall com o comando ```service iptables stop``` e tente acessar o site novamente.
