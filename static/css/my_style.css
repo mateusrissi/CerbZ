@@ -30,8 +30,13 @@ body div.content {
   text-align: justify;
 }
 
+body div.card-text {
+  text-align: justify;
+}
+
 p img {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  max-width: 500px;
+  max-height: 500px;
 }

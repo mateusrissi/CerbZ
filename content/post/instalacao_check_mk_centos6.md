@@ -4,8 +4,8 @@ authors = [
 ]
 
 title = "Instalação do Check_MK no CentOS 6"
-date = "2020-06-22"
-description = "&nbsp;&nbsp;&nbsp;&nbsp;O check_MK é uma ferramenta, de código aberto, para realizar monitoramento da infraestrutura de TI. Esta postagem é um tutorial para a instalação do Check_MK 1.5 Raw Edition no CentOS 6."
+date = "2020-06-21"
+description = "    O check_MK é uma ferramenta, de código aberto, para realizar monitoramento da infraestrutura de TI. Esta postagem é um tutorial para a instalação do Check_MK 1.5 Raw Edition no CentOS 6."
 
 tags = [
   "tutorial",
@@ -135,7 +135,7 @@ rpm --import Check_MK-pubkey.gpg
 yum install check_mk-1.5.rpm
 ```
 
-Para verificar se tudo ocorreu corretamente, execute o seguinte comando ```omd version```.
+&nbsp;&nbsp;&nbsp;&nbsp;Para verificar se tudo ocorreu corretamente, execute o seguinte comando ```omd version```.
 
 &nbsp;
 
