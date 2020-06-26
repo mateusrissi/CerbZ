@@ -59,12 +59,6 @@ ntpdate -u 0.br.pool.ntp.org
 
 &nbsp;&nbsp;&nbsp;&nbsp;O __0.br.pool.ntp.org__ é apenas um servidor [NTP](https://pt.wikipedia.org/wiki/Network_Time_Protocol "Network Time Protocol"), pode ser substituído por qualquer outro de sua preferência.
 
-&nbsp;&nbsp;&nbsp;&nbsp;Após executar o comando:
-
-![ntpdate image](https://www.cerbz.com/images/ntp_date.jpg "ntpdate image")
-
-&nbsp;
-
 &nbsp;&nbsp;&nbsp;&nbsp;Edite o arquivo da crontab com ```vi /etc/crontab``` e adicione a seguinte linha para que o comando ```ntpdate``` seja executado sozinho 1 vez a cada hora:
 
 ```bash
@@ -78,7 +72,7 @@ ntpdate -u 0.br.pool.ntp.org
 
 &nbsp;&nbsp;&nbsp;&nbsp;Aqui temos duas opções:
 
-### Desabilitar SELinux
+###### Desabilitar SELinux
 
 &nbsp;&nbsp;&nbsp;&nbsp;Podemos desabilitar o SELinux (não aconselhado para ambientes de [produção](https://bsoft.com.br/blog/ambiente-de-producao-e-homologacao "Explicação ambiente de produção")) editando o arquivo ```/etc/selinux/config```.
 
@@ -86,15 +80,11 @@ ntpdate -u 0.br.pool.ntp.org
 vi /etc/selinux/config
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;Troque ```enforcing``` por ```disabled``` e reinicie o servidor.
-
-```bash
-reboot
-```
+&nbsp;&nbsp;&nbsp;&nbsp;Troque ```enforcing``` por ```disabled``` e reinicie o servidor com o comando ```reboot```.
 
 &nbsp;
 
-### Configurar o SELinux
+###### Configurar o SELinux
 
 &nbsp;&nbsp;&nbsp;&nbsp;Podemos adicionar regras que permitam o funcionamento do Check_MK usando o [audit2allow](https://linux.die.net/man/1/audit2allow "audit2allow linux man page"). Aqui tem um [tutorial](https://andhersonsilva.wordpress.com/2016/10/04/apresentando-o-audit2allow-para-configurar-politicas-no-selinux/ "Tutorial audit2allow") para o ```audit2allow```.
 
@@ -155,7 +145,7 @@ omd version
 
 &nbsp;
 
-&nbsp;&nbsp;&nbsp;&nbsp;Outras versões disponíveis [aqui](https://checkmk.com/download.php "Página de download do Check_MK").
+&nbsp;&nbsp;&nbsp;&nbsp;Outras versões do check_MK estão disponíveis [aqui](https://checkmk.com/download.php "Página de download do Check_MK").
 
 &nbsp;
 
@@ -177,18 +167,20 @@ omd start monitoramento
 
 ![OMD Start](https://www.cerbz.com/images/ "OMD Start")
 
-&nbsp;&nbsp;&nbsp;&nbsp;Caso não tenha anotado a senha do site, mude para o usuário monitoramento com _```su monitoramento```_ e troque a senha com o comando:
+&nbsp;&nbsp;&nbsp;&nbsp;Caso não tenha anotado a senha do site, mude para o usuário monitoramento com ```su monitoramento``` e troque a senha com o comando:
 
 ```bash
 htpasswd -m ~/etc/htpasswd cmkadmin
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;Agora é possível acessar o site recém criado, para tanto utilize seu navegador e acesse _server-name-or-ip-address/site_name_. Por exemplo, o endereço IP do meu servidor é 192.168.0.177 e o nome do site que criei é monitoramento, logo devo acessar a URL _192.168.0.177/monitoramento_.
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;Agora é possível acessar o site recém criado, para tanto utilize seu navegador e acesse ```server-name-or-ip-address/site_name```. Por exemplo, o endereço IP do meu servidor é 192.168.0.177 e o nome do site que criei é monitoramento, logo devo acessar a URL ```192.168.0.177/monitoramento```.
 
 ![Check_MK Login Page](https://www.cerbz.com/images/ "Check_MK Login Page")
 
 ![Check_MK Index Page](https://www.cerbz.com/images/ "Check_MK Index Page")
 
-Funcionando?
+&nbsp;&nbsp;&nbsp;&nbsp;Caso não esteja funcionando, o motivo pode ser o bloqueio do site pelo firewall do CentOS. Desabilite o firewall com o comando ```service iptables stop``` e tente acessar o site novamente.
 
-Caso não esteja funcionando, o motivo pode ser o bloqueio do site pelo firewall do CentOS. Desabilite o firewall com o comando ```service iptables stop``` e tente acessar o site novamente.
+&nbsp;&nbsp;&nbsp;&nbsp;Funcionando?
