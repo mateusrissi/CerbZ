@@ -42,12 +42,6 @@ images = [
 
 &nbsp;
 
-# Emails
-&nbsp;&nbsp;&nbsp;&nbsp;Para recebermos notificações sobre o monitoramento por email vamos configurar o [SMTP](https://pt.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol "SMTP").
-
-
-&nbsp;
-
 # Tempo do sistema
 &nbsp;&nbsp;&nbsp;&nbsp;Para que o Check_MK use um horário correto utilizaremos o ```ntpdate```.
 

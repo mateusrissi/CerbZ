@@ -37,6 +37,8 @@ body div.card-text {
 p img {
   display: block;
   margin: 0 auto;
-  max-width: 500px;
-  max-height: 500px;
+  /*max-width: 500px;
+  max-height: 500px;*/
+  max-width: fit-content;
+  max-height: fit-content;
 }
