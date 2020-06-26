@@ -169,7 +169,7 @@ omd start monitoramento
 
 ![OMD Start](https://www.cerbz.com/images/ "OMD Start")
 
-Caso não tenha anotado a senha do site, mude para o usuário monitoramento com ```_su monitoramento_``` e troque a senha com o comando:
+Caso não tenha anotado a senha do site, mude para o usuário monitoramento com _```su monitoramento```_ e troque a senha com o comando:
 
 ```bash
 htpasswd -m ~/etc/htpasswd cmkadmin
